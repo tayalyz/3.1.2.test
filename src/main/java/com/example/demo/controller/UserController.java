@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/add";
         }
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PatchMapping("/user_{id}")
-    public String update(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/edit";
         }
